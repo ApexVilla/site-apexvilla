@@ -671,10 +671,37 @@ section {
   position: relative;
 }
 
+/* About Section Grid */
+.about__grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+
+/* Mobile Small */
+@media (max-width: 480px) {
+  section {
+    padding: 60px 0;
+  }
+
+  .home {
+    padding: 100px 0 60px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   section {
     padding: 80px 0;
-    /* Reduced padding on mobile */
   }
 }
 
@@ -822,10 +849,10 @@ section {
   align-items: start;
 }
 
-@media (max-width: 968px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .detail-grid {
     grid-template-columns: 1fr;
-    /* Stack on mobile */
     gap: 40px;
   }
 }
@@ -977,7 +1004,7 @@ section {
   text-align: center;
 }
 
-@media (max-width: 968px) {
+@media (max-width: 1024px) {
   .detail-grid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1279,7 +1306,8 @@ section {
 }
 
 /* Responsive */
-@media (max-width: 980px) {
+/* Tablet */
+@media (max-width: 1024px) {
   .home__container {
     grid-template-columns: 1fr;
     text-align: center;
@@ -1292,6 +1320,8 @@ section {
 
   .home__stats {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
   }
 
   .hero__img {
@@ -1311,7 +1341,8 @@ section {
   }
 }
 
-@media (max-width: 560px) {
+/* Mobile */
+@media (max-width: 768px) {
 
   .services__grid,
   .portfolio__grid,
@@ -1320,20 +1351,46 @@ section {
   }
 
   .home__title {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
   }
 
   .section__title {
-    font-size: 1.9rem;
+    font-size: 2rem;
   }
 
   .home__buttons {
     flex-direction: column;
+    gap: 16px;
   }
 
   .button {
     width: 100%;
     justify-content: center;
+    min-height: 48px;
+  }
+
+  /* Touch targets */
+  .nav__link {
+    padding: 16px 0;
+    font-size: 1.1rem;
+  }
+
+  .scrollup {
+    width: 56px;
+    height: 56px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* Floating cards mobile */
+  .floating-card {
+    position: static;
+    margin: 16px auto;
+    max-width: 280px;
+  }
+
+  .hero__image-wrapper {
+    overflow: hidden;
   }
 }
 
@@ -1508,7 +1565,7 @@ section {
 }
 
 /* Mobile Adjustments */
-@media (max-width: 968px) {
+@media (max-width: 1024px) {
   .robot-companion {
     position: relative;
     top: auto;
@@ -1516,14 +1573,12 @@ section {
     width: 200px;
     height: 200px;
     margin: 0 auto -40px;
-    /* Pull it up a bit */
     transform: none;
     animation: float-mobile 6s ease-in-out infinite;
   }
 
   .home__container {
     padding-top: 0;
-    /* Adjust spacing */
   }
 
   @keyframes float-mobile {
@@ -1536,5 +1591,25 @@ section {
     50% {
       transform: translateY(-10px);
     }
+  }
+}
+
+/* Mobile Small - Extra optimizations */
+@media (max-width: 480px) {
+  .home__title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .section__title {
+    font-size: 1.75rem;
+  }
+
+  .stat h3 {
+    font-size: 2rem;
+  }
+
+  .footer {
+    padding: 80px 0 100px;
   }
 }
