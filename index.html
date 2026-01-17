@@ -7,19 +7,130 @@
   <title>ApexVilla - Inteligência Artificial, Sites Inteligentes & Sistemas SaaS</title>
   <meta name="description"
     content="ApexVilla — Transformamos negócios com IA, criação de sites profissionais, sistemas SaaS sob medida e automação inteligente. Tecnologia premium para resultados extraordinários." />
-  <link rel="icon" href="/images/logo.png" />
+
+  <!-- SEO Meta Tags -->
+  <meta name="keywords"
+    content="criação de sites, desenvolvimento web, tráfego pago, google ads, meta ads, tiktok ads, saas, sistemas sob medida, automação, inteligência artificial, chatbot, agência digital, desenvolvimento de apps, Goiânia, Goiás, Brasil" />
+  <meta name="author" content="ApexVilla" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://apexvilla.com.br/" />
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://apexvilla.com.br/" />
+  <meta property="og:title" content="ApexVilla - IA, Sites Profissionais & Sistemas SaaS" />
+  <meta property="og:description"
+    content="Transformamos negócios com IA, sites profissionais, sistemas SaaS e automação inteligente. Tecnologia premium para resultados extraordinários." />
+  <meta property="og:image" content="https://apexvilla.com.br/images/banner.png" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Twitter Cards -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://apexvilla.com.br/" />
+  <meta property="twitter:title" content="ApexVilla - IA, Sites & Sistemas SaaS" />
+  <meta property="twitter:description"
+    content="Transformamos negócios com IA, sites profissionais, sistemas SaaS e automação inteligente. Tecnologia premium." />
+  <meta property="twitter:image" content="https://apexvilla.com.br/images/banner.png" />
+
+  <link rel="icon" href="images/logo_final.png" />
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="style.css" as="style" />
+  <link rel="preload" href="script.js" as="script" />
+
+  <!-- Preconnect to External Domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="dns-prefetch" href="https://wa.me" />
+
   <link rel="stylesheet" href="style.css" />
 
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap"
     rel="stylesheet">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "ApexVilla",
+    "description": "Agência digital especializada em IA, criação de sites profissionais, sistemas SaaS sob medida e automação inteligente",
+    "url": "https://apexvilla.com.br",
+    "logo": "https://apexvilla.com.br/images/logo_final.png",
+    "image": "https://apexvilla.com.br/images/banner.png",
+    "telephone": "+55-62-98125-4228",
+    "email": "villarroelsamir85@mail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Goiânia",
+      "addressRegion": "GO",
+      "addressCountry": "BR"
+    },
+    "sameAs": [],
+    "priceRange": "$$",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "237"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Serviços ApexVilla",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Gestão de Tráfego Pago",
+            "description": "Campanhas escaláveis em Google Ads, Meta Ads e TikTok Ads com otimização por ROI"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Criação de Sites Profissionais",
+            "description": "Sites modernos, rápidos e inteligentes. WordPress premium, e-commerce e landing pages de alta conversão"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Desenvolvimento de Apps",
+            "description": "Aplicativos mobile nativos e híbridos para iOS e Android com design intuitivo"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Sistemas SaaS sob Medida",
+            "description": "Desenvolvimento de sistemas SaaS personalizados com IA integrada e arquitetura escalável"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automação com IA",
+            "description": "Automação de processos, atendimento e operações com inteligência artificial"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
 </head>
 
 <body>
   <header class="header">
-    <nav class="nav container">
-      <a href="#home" class="nav__logo">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a href="#home" class="nav__logo" aria-label="ApexVilla - Ir para o início">
         <img src="images/logo_final.png" alt="Apex Villa" /> <span>Apex Villa</span>
       </a>
 
@@ -85,10 +196,10 @@
       </div>
     </section>
 
-    <section class="services" id="services">
+    <section class="services" id="services" aria-labelledby="services-title">
       <div class="container">
         <span class="section__subtitle">O Que Fazemos</span>
-        <h2 class="section__title">Soluções inteligentes que transformam negócios</h2>
+        <h2 id="services-title" class="section__title">Soluções inteligentes que transformam negócios</h2>
         <p class="section__description">Criação de sites profissionais, tráfego pago estratégico, sistemas SaaS sob
           medida e automação com IA. Tecnologia premium para resultados extraordinários.</p>
 
@@ -467,7 +578,7 @@
 
 
 
-    <section class="about" id="about">
+    <section class="about" id="about" aria-labelledby="about-title">
       <div class="container" style="display:grid;grid-template-columns:420px 1fr;gap:28px;align-items:center">
         <div class="reveal-up" style="border-radius:14px;overflow:hidden;box-shadow:0 10px 40px rgba(2,6,23,0.8)">
           <img src="images/about.png" alt="Sobre Apex Villa"
@@ -475,7 +586,7 @@
         </div>
         <div class="reveal-up" style="animation-delay: 0.2s">
           <span class="section__subtitle">Sobre A Apexvilla</span>
-          <h2 class="section__title">Tecnologia, Sistemas e Automação Inteligente</h2>
+          <h2 id="about-title" class="section__title">Tecnologia, Sistemas e Automação Inteligente</h2>
 
           <p class="about__description">
             A <strong>Apexvilla</strong> é uma empresa especializada em soluções digitais de alto nível, atuando no
@@ -528,10 +639,10 @@
       </div>
     </section>
 
-    <section class="portfolio" id="portfolio">
+    <section class="portfolio" id="portfolio" aria-labelledby="portfolio-title">
       <div class="container">
         <span class="section__subtitle">Nosso Trabalho</span>
-        <h2 class="section__title">Cases que entregaram resultado</h2>
+        <h2 id="portfolio-title" class="section__title">Cases que entregaram resultado</h2>
         <p class="section__description">Exemplos de projetos com alto impacto em tráfego, conversão e receita.</p>
 
         <div class="portfolio__grid">
@@ -569,11 +680,11 @@
       </div>
     </section>
 
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="container contact__container">
         <div class="contact__content">
           <span class="section__subtitle">Vamos conversar</span>
-          <h2 class="section__title">Pronto para transformar seu negócio com IA?</h2>
+          <h2 id="contact-title" class="section__title">Pronto para transformar seu negócio com IA?</h2>
           <p class="contact__description">Solicite uma demonstração gratuita. Fale conosco via WhatsApp ou preencha o
             formulário e descubra como a inteligência artificial pode revolucionar seu negócio.</p>
 
@@ -599,6 +710,7 @@
 
           <div style="margin-top:14px;"><a
               href="https://wa.me/5562981254228?text=Ol%C3%A1!+Quero+um+diagn%C3%B3stico+com+Apex+Villa"
+              aria-label="Solicitar diagnóstico pelo WhatsApp" rel="noopener noreferrer" target="_blank"
               class="button button--cta">Abrir WhatsApp</a></div>
         </div>
 
@@ -610,21 +722,23 @@
                 placeholder="Seu melhor e-mail" required></div>
             <div class="form__group"><input class="form__input" name="phone" type="tel" placeholder="Seu telefone"
                 required></div>
-            <option value="">Selecione o serviço</option>
-            <option value="traffic">Gestão de Tráfego Pago</option>
-            <option value="website">Criação de Sites & LPs</option>
-            <option value="app">Desenvolvimento de Apps</option>
-            <option value="saas">Sistemas SaaS & Plataformas</option>
-            <option value="automation">Automação com IA & Chatbots</option>
-            <option value="marketing">Marketing Digital & SEO</option>
-            <option value="consulting">Consultoria / Pacote Completo</option>
-            </select>
+            <div class="form__group">
+              <select class="form__select" name="service" required>
+                <option value="">Selecione o serviço</option>
+                <option value="traffic">Gestão de Tráfego Pago</option>
+                <option value="website">Criação de Sites & LPs</option>
+                <option value="app">Desenvolvimento de Apps</option>
+                <option value="saas">Sistemas SaaS & Plataformas</option>
+                <option value="automation">Automação com IA & Chatbots</option>
+                <option value="marketing">Marketing Digital & SEO</option>
+                <option value="consulting">Consultoria / Pacote Completo</option>
+              </select>
+            </div>
+            <div class="form__group"><textarea class="form__textarea" name="message" rows="5"
+                placeholder="Conte mais sobre seu projeto..."></textarea></div>
+            <button type="submit" class="form__button">Enviar Mensagem</button>
+          </form>
         </div>
-        <div class="form__group"><textarea class="form__textarea" name="message" rows="5"
-            placeholder="Conte mais sobre seu projeto..."></textarea></div>
-        <button type="submit" class="form__button">Enviar Mensagem</button>
-        </form>
-      </div>
       </div>
     </section>
   </main>
@@ -669,7 +783,7 @@
   </footer>
 
   <a href="https://wa.me/5562981254228?text=Ol%C3%A1!+Quero+informacoes+sobre+Apex+Villa" class="scrollup"
-    aria-label="WhatsApp">
+    aria-label="Fale conosco pelo WhatsApp" rel="noopener noreferrer" target="_blank">
     <i class='bx bxl-whatsapp' style="font-size:20px;color:#071226"></i>
   </a>
 
