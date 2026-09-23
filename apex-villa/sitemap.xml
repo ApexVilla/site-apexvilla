@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://apexvilla.com.br/</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://apexvilla.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://apexvilla.com.br/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apexvilla.com.br/"/>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/logo-gold.png</image:loc>
+      <image:title>ApexVilla — Agência Digital de Tecnologia e IA</image:title>
+      <image:caption>Logo da ApexVilla, agência especializada em sites, automação IA e sistemas SaaS</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/banner.png</image:loc>
+      <image:title>ApexVilla — Sites, Automação com IA e Sistemas SaaS</image:title>
+      <image:caption>Banner principal da ApexVilla: agência digital com foco em resultados reais</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/web_design_hero.jpg</image:loc>
+      <image:title>Criação de Sites Profissionais — ApexVilla</image:title>
+      <image:caption>Mockup de site premium criado pela ApexVilla com design de alta conversão</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/systems_saas_hero.jpg</image:loc>
+      <image:title>Sistemas SaaS e Aplicativos — ApexVilla</image:title>
+      <image:caption>Painel de sistema SaaS desenvolvido pela ApexVilla para gestão empresarial</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/ai_automation_hero.jpg</image:loc>
+      <image:title>Automação com Inteligência Artificial — ApexVilla</image:title>
+      <image:caption>Automação de atendimento e vendas 24/7 com IA e chatbots GPT</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/traffic_ads_hero.jpg</image:loc>
+      <image:title>Gestão de Tráfego Pago — Google Ads e Meta Ads | ApexVilla</image:title>
+      <image:caption>Gestão estratégica de campanhas Google Ads e Meta Ads com ROI comprovado</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/about-tech.png</image:loc>
+      <image:title>Sobre a ApexVilla — Agência de Tecnologia em Goiânia</image:title>
+      <image:caption>Equipe e tecnologia da ApexVilla: 5+ anos transformando negócios com inovação digital</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/case1.png</image:loc>
+      <image:title>Case Apex-Finanças — Portfolio ApexVilla</image:title>
+      <image:caption>Sistema de gestão financeira desenvolvido pela ApexVilla: Apex-Finanças</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/case2.png</image:loc>
+      <image:title>Case Apex-Estética — Portfolio ApexVilla</image:title>
+      <image:caption>Plataforma para clínicas estéticas desenvolvida pela ApexVilla: Apex-Estética</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://apexvilla.com.br/images/case3.png</image:loc>
+      <image:title>Case Apex-Glass — Portfolio ApexVilla</image:title>
+      <image:caption>Sistema para vidraçarias e esquadrias desenvolvido pela ApexVilla: Apex-Glass</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://apexvilla.com.br/sobre</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://apexvilla.com.br/servicos</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://apexvilla.com.br/portfolio</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://apexvilla.com.br/sistemas</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://apexvilla.com.br/processo</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://apexvilla.com.br/blog</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://apexvilla.com.br/contato</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

@@ -1,0 +1,36 @@
+{
+  "name": "apexvilla-saite",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000A\u0000p\u0000e\u0000x\u0000v\u0000i\u0000l\u0000l\u0000a\u0000-\u0000s\u0000a\u0000i\u0000t\u0000e\u0000\r\u0000 \u0000\r\u0000 \u0000",
+  "main": "script.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:static": "node build-landings.mjs && node build-es.mjs",
+    "build:landings": "node build-landings.mjs",
+    "build:es": "node build-es.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "leads": "node /root/apexvilla/deploy/lead-collector/leads.mjs",
+    "leads:csv": "node /root/apexvilla/deploy/lead-collector/leads.mjs --csv"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ApexVilla/Apexvilla-saite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ApexVilla/Apexvilla-saite/issues"
+  },
+  "homepage": "https://github.com/ApexVilla/Apexvilla-saite#readme",
+  "devDependencies": {
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@splinetool/runtime": "^1.12.97",
+    "gsap": "^3.15.0"
+  }
+}

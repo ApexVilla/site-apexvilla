@@ -1,0 +1,31 @@
+# ApexVilla
+
+> Agência digital brasileira especializada em criação de sites, desenvolvimento de
+> aplicativos e sistemas SaaS sob medida, automação com inteligência artificial e
+> gestão de tráfego pago. Sediada em Goiânia (GO), atende todo o Brasil e a América
+> Latina. Também disponível em espanhol em /es/.
+
+## Serviços
+
+- [Criação de Sites e Landing Pages](https://apexvilla.com.br/#services): sites institucionais e páginas de alta conversão, PageSpeed 90+, SEO avançado. A partir de R$ 3.000.
+- [Criação de Aplicativos e Sistemas](https://apexvilla.com.br/#services): apps iOS/Android e plataformas SaaS sob medida, arquitetura em nuvem (AWS/Google Cloud), conformidade LGPD.
+- [Automação com IA](https://apexvilla.com.br/#services): agentes de IA e chatbots GPT que atendem, qualificam e convertem leads 24/7 no WhatsApp, Instagram e web, integrados ao CRM.
+- [Tráfego Pago](https://apexvilla.com.br/#services): gestão de Google Ads, Meta Ads e TikTok Ads com foco em ROI. Gestão mensal a partir de R$ 800.
+
+## Empresa
+
+- [Sobre a ApexVilla](https://apexvilla.com.br/#about): fundada em 2020, liderada por Samir Villarroel (CEO & Fundador).
+- [Nosso Processo](https://apexvilla.com.br/#process): descoberta, estratégia, execução e evolução.
+- [Portfólio](https://apexvilla.com.br/#portfolio): cases Apex-Finanças, Apex-Estética e Apex-Glass.
+- [Sistemas em produção](https://apexvilla.com.br/#systems): Apex-Finanças (financeiro), Apex-Estética (clínicas), Apex-Glass (vidraçarias automotivas), Apex-Plan (planos e benefícios).
+- [Depoimentos](https://apexvilla.com.br/#testimonials)
+
+## Versão em espanhol
+
+- [ApexVilla en español](https://apexvilla.com.br/es/): creación de sitios web, desarrollo de aplicaciones y sistemas a medida, automatización con IA y tráfico pagado para América Latina.
+
+## Contato
+
+- [Solicitar diagnóstico gratuito](https://apexvilla.com.br/#contact)
+- [WhatsApp](https://wa.me/5562981254228)
+- E-mail: samir@apexvilla.com.br

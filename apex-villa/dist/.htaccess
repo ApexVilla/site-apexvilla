@@ -1,0 +1,38 @@
+# Forçar HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Redirecionar www para sem www (canonical)
+RewriteCond %{HTTP_HOST} ^www\.apexvilla\.com\.br [NC]
+RewriteRule ^(.*)$ https://apexvilla.com.br/$1 [R=301,L]
+
+# SPA fallback — redireciona rotas desconhecidas para index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.html [L,QSA]
+
+# Cache para assets com hash (imutáveis)
+<FilesMatch "\.(js|css|woff2|woff|ttf)$">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+
+# Cache para imagens
+<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
+  Header set Cache-Control "public, max-age=604800, stale-while-revalidate=86400"
+</FilesMatch>
+
+# Compressão Gzip
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json text/xml application/xml image/svg+xml
+</IfModule>
+
+# Headers de segurança
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+</IfModule>

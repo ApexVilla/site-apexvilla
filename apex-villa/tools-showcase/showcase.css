@@ -1,0 +1,342 @@
+/* ============================================================
+   ApexVilla — Portfólio ao vivo (#work)
+   Prints reais dos sites no ar. A página rola dentro do frame.
+   Sem dependências: só CSS + um JS próprio (showcase-*.js).
+   ============================================================ */
+
+.wk {
+  position: relative;
+  padding: 120px 0 100px;
+  /* Sem `overflow: hidden` aqui: isso transformaria a seção em container de
+     rolagem e mataria o position:sticky do palco. Quem recorta o trilho é
+     o próprio .wk__stage. */
+}
+
+.wk__head { text-align: center; margin-bottom: 40px; }
+
+/* título com revelação letra a letra (o JS injeta os <span>) */
+.wk__title .wk-ch {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em) rotate(4deg);
+  transition: opacity .55s var(--ease-out), transform .55s var(--ease-out);
+}
+.wk.is-in .wk__title .wk-ch { opacity: 1; transform: none; }
+
+/* ─── Filtros ─── */
+.wk__filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 36px;
+}
+
+.wk__chip {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: rgba(212, 175, 55, .04);
+  border: 1px solid rgba(212, 175, 55, .18);
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: color .25s var(--ease-smooth), border-color .25s var(--ease-smooth),
+              background .25s var(--ease-smooth);
+}
+.wk__chip:hover { color: var(--gold-light); border-color: rgba(212, 175, 55, .45); }
+.wk__chip[aria-pressed="true"] {
+  color: #0A1F1C;
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.wk__chip b { font-weight: 400; opacity: .55; margin-left: 6px; }
+
+/* ─── Palco horizontal (desktop) ─── */
+.wk__flow { position: relative; }
+
+.wk__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wk__track {
+  display: flex;
+  gap: 28px;
+  padding: 0 max(24px, calc(50vw - 600px));
+  will-change: transform;
+}
+
+.wk__rail {
+  margin: 34px auto 0;
+  width: min(420px, 60vw);
+  height: 2px;
+  background: rgba(212, 175, 55, .16);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.wk__rail i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 2px;
+}
+
+.wk__hint {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+
+/* ─── Card ─── */
+.wk-card {
+  flex: 0 0 auto;
+  width: 420px;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+}
+.wk.is-in .wk-card { opacity: 1; transform: none; }
+.wk-card[hidden] { display: none; }
+
+.wk-frame {
+  display: block;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0d211d;
+  border: 1px solid rgba(212, 175, 55, .18);
+  text-decoration: none;
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, .9);
+  transition: border-color .35s var(--ease-smooth), box-shadow .35s var(--ease-smooth),
+              transform .35s var(--ease-smooth);
+}
+.wk-card:hover .wk-frame,
+.wk-frame:focus-visible {
+  border-color: rgba(212, 175, 55, .55);
+  box-shadow: 0 26px 60px -24px rgba(0, 0, 0, .95), 0 0 0 1px rgba(212, 175, 55, .18);
+  outline: none;
+}
+
+/* barra do navegador */
+.wk-chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  background: #0a1a17;
+  border-bottom: 1px solid rgba(212, 175, 55, .12);
+}
+.wk-chrome i {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, .28);
+  flex-shrink: 0;
+}
+.wk-chrome i:nth-child(2) { background: rgba(212, 175, 55, .2); }
+.wk-chrome i:nth-child(3) { background: rgba(212, 175, 55, .14); }
+.wk-url {
+  flex: 1;
+  margin-left: 6px;
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* viewport + print rolando */
+.wk-vp {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0d211d;
+}
+.wk-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* o print é 640x1600 (2,5x a largura); a janela mostra 0,625x.
+     Rolar 75% da altura da imagem percorre a página inteira. */
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.1s var(--ease-out);
+  will-change: transform;
+}
+.wk-card:hover .wk-shot,
+.wk-frame:focus-visible .wk-shot,
+.wk-card.is-playing .wk-shot {
+  transform: translate3d(0, -75%, 0);
+  transition: transform 5s cubic-bezier(.33, 0, .28, 1);
+}
+
+.wk-live {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(10, 31, 28, .82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(62, 207, 126, .35);
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #6fdca1;
+}
+.wk-live i {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #3ecf7e;
+}
+
+/* metadados */
+.wk-meta { padding: 16px 4px 0; }
+.wk-meta h3 {
+  font-family: var(--font-display);
+  font-size: 1.32rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.15;
+  margin: 0;
+}
+.wk-meta p {
+  margin: 5px 0 0;
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+.wk-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: .75;
+  transition: opacity .25s, transform .25s;
+}
+.wk-card:hover .wk-go { opacity: 1; transform: translateX(4px); }
+
+/* card de sistema (sem print — produto atrás de login) */
+.wk-card--sys .wk-vp {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(212, 175, 55, .12), transparent 70%),
+    #0d211d;
+}
+.wk-sys {
+  text-align: center;
+  padding: 20px;
+}
+.wk-sys b {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.wk-sys span {
+  display: block;
+  margin-top: 10px;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.wk-sys svg { color: var(--gold); opacity: .5; margin-bottom: 14px; }
+
+/* ─── Faixa de nomes ─── */
+.wk__band {
+  margin-top: 64px;
+  border-top: 1px solid rgba(212, 175, 55, .12);
+  border-bottom: 1px solid rgba(212, 175, 55, .12);
+  padding: 18px 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.wk__marquee {
+  display: flex;
+  width: max-content;
+  gap: 44px;
+  animation: wk-slide 46s linear infinite;
+}
+.wk__band:hover .wk__marquee { animation-play-state: paused; }
+.wk__marquee span {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.wk__marquee span::after {
+  content: '·';
+  margin-left: 44px;
+  color: var(--gold);
+  opacity: .5;
+}
+@keyframes wk-slide {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.wk__foot {
+  text-align: center;
+  margin-top: 46px;
+}
+
+/* ─── Mobile / tablet: grade normal, sem palco horizontal ─── */
+@media (max-width: 1023px) {
+  .wk { padding: 88px 0 72px; }
+  .wk__stage { position: static; height: auto; display: block; overflow: visible; }
+  .wk__flow { height: auto !important; }
+  .wk__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 26px;
+    padding: 0 20px;
+    transform: none !important;
+  }
+  .wk-card { width: auto; }
+  .wk__rail, .wk__hint { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wk__stage { position: static; height: auto; display: block; overflow: visible; }
+  .wk__flow { height: auto !important; }
+  .wk__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 26px;
+    transform: none !important;
+  }
+  .wk-card { width: auto; opacity: 1; transform: none; }
+  .wk__title .wk-ch { opacity: 1; transform: none; }
+  .wk-shot, .wk-card:hover .wk-shot { transition: none; transform: none; }
+  .wk__marquee { animation: none; }
+  .wk__rail, .wk__hint { display: none; }
+}

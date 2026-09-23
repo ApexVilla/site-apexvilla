@@ -1,1 +1,17 @@
+
+# --- padrao ApexVilla ---
 node_modules/
+.env
+.env.*
+!.env.example
+secrets/
+*.jks
+*.keystore
+.playwright-mcp/
+playwright-report/
+test-results/
+__pycache__/
+*.log
+.DS_Store
+dist.bkp-*/
+lp-sites.png
