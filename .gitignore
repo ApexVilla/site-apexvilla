@@ -15,3 +15,10 @@ __pycache__/
 .DS_Store
 dist.bkp-*/
 lp-sites.png
+
+# coletor de leads: notas internas e testes de operação ficam fora do repositório público
+operations/lead-collector/NOTAS-INTERNAS.md
+operations/lead-collector/REVISAO-DEFENSIVA-*.md
+operations/lead-collector/RODADA-*.md
+operations/lead-collector/security-test.mjs
+operations/lead-collector/functional-ui.mjs
