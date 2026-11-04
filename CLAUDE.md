@@ -111,6 +111,8 @@ The full rename procedure (used on 2026-07-16 for the form patch):
 
 ## Lead capture
 
+The collector runs as uid 1000 with a read-only filesystem and no capabilities. `/root/apexvilla/leads` belongs to uid 1000 (dir 700, file 600): keep that ownership if you recreate the folder.
+
 Every form submission is persisted on the VPS **before** the WhatsApp hand-off, so a visitor who abandons WhatsApp (or whose popup is blocked, or who has no WhatsApp) still leaves a record. Previously those leads vanished with no trace.
 
 | Piece | Where |
@@ -154,6 +156,14 @@ The section between `#portfolio` and `#testimonials` in `dist/index.html`. It sh
 - `hreflang` in `dist/index.html`, `dist/es/index.html`, each landing page and `dist/sitemap.xml` must agree exactly and be reciprocal, or Google discards the whole language cluster. The old sitemap said `/?lang=es` while the page said `/es/` — that contradiction alone voided it.
 - Do not add `aggregateRating` to JSON-LD without real, verifiable reviews — it was removed for being fabricated (4.9/237) and risks a structured-data penalty.
 - Keep `dist/llms.txt` anchors in sync with the real section ids (`#services`, `#about`, `#process` — *not* `#servicos`, `#sobre`, `#processo`, which is what it shipped with).
+
+## Content-Security-Policy
+
+The CSP lives in `/root/apexvilla/deploy/nginx/default.conf`, on the two locations that serve HTML (`add_header` in a location replaces the ones from `server`). `script-src` allows the inline scripts of `dist/` by SHA-256.
+
+**After editing any inline `<script>` in `dist/`, run `python3 operations/csp-hashes.py`.** A missing hash means the browser blocks that script. Update the policy and run `docker exec apexvilla-web nginx -t && docker exec apexvilla-web nginx -s reload`.
+
+Adding a new external host (script, API, frame) also needs an entry in the policy. A console violation for `eval` from the Spline runtime is expected: it probes `new Function` and falls back.
 
 ## Deployment
 
