@@ -85,16 +85,21 @@
     .stats{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
     .stats li{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 8px;border:1px solid rgba(212,175,55,.2);border-radius:14px;background:rgba(255,255,255,.03);text-align:center;font:700 1rem/1.3 var(--sans)}
     .stats .ico{font-size:1.75rem;color:var(--gold)}
-    .visual{display:none;position:relative}
+    .visual{position:relative;margin-top:8px}
     .visual-glow{position:absolute;inset:-15%;border-radius:50%;background:radial-gradient(ellipse,rgba(212,175,55,.1),transparent 68%);pointer-events:none;animation:glow2 7s ease-in-out infinite alternate}
-    .shot{position:relative;border:1px solid var(--line);background:var(--bg-deep);box-shadow:0 30px 70px -28px rgba(0,0,0,.8)}
-    .shot img{width:100%;aspect-ratio:4/3;object-fit:cover}
+    .shot{position:relative;border:1px solid var(--line);background:var(--bg-deep);box-shadow:0 30px 70px -28px rgba(0,0,0,.8);overflow:hidden}
+    .shot img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:opacity .55s var(--ease)}
+    .shot img.is-out{opacity:0}
     .cn{position:absolute;width:22px;height:22px;z-index:2}
     .cn-tl{top:-1px;left:-1px;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
     .cn-tr{top:-1px;right:-1px;border-top:2px solid var(--gold);border-right:2px solid var(--gold)}
     .cn-bl{bottom:-1px;left:-1px;border-bottom:2px solid var(--gold);border-left:2px solid var(--gold)}
     .cn-br{bottom:-1px;right:-1px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold)}
-    .visual figcaption{position:relative;margin-top:14px;font-size:1rem;color:var(--tx2)}
+    .visual figcaption{position:relative;margin-top:14px;font-size:1rem;color:var(--tx2);min-height:1.4em;transition:opacity .35s var(--ease)}
+    .visual figcaption.is-out{opacity:0}
+    .visual-dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+    .visual-dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:rgba(212,175,55,.28);cursor:pointer}
+    .visual-dots button[aria-current="true"]{background:var(--gold);transform:scale(1.25)}
 
     .sec{padding:68px 0;border-top:1px solid var(--line);scroll-margin-top:74px}
     .sec-deep{background:var(--bg-deep)}
@@ -234,7 +239,7 @@
     @media (min-width:960px){
       .hero{padding:88px 0 96px}
       .hero-in{grid-template-columns:1.1fr .9fr;gap:64px}
-      .visual{display:block}
+      .visual{margin-top:0}
       .hero-glow{left:62%;top:30%}
       .stats{max-width:560px}
       .sec{padding:88px 0}
@@ -306,17 +311,14 @@
             <li><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Clientes en Venezuela</li>
           </ul>
         </div>
-        <!-- Só no desktop (≥960px). No celular o <source> não casa e o navegador baixa só o GIF de 1px. -->
-        <figure class="visual">
+        <figure class="visual" id="hero-sites" aria-roledescription="carrusel">
           <div class="visual-glow" aria-hidden="true"></div>
           <div class="shot">
             <span class="cn cn-tl" aria-hidden="true"></span><span class="cn cn-tr" aria-hidden="true"></span><span class="cn cn-bl" aria-hidden="true"></span><span class="cn cn-br" aria-hidden="true"></span>
-            <picture>
-              <source media="(min-width: 960px)" srcset="/img/sitio-web/hero-web-640x480.webp" width="640" height="480">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="640" height="480" alt="Diseño de sitio web profesional ApexVilla" decoding="async">
-            </picture>
+            <img id="hero-site-img" src="/img/sitio-web/mitsujas-640x480.webp" width="640" height="480" alt="Sitio web de Mitsujas Guayana, hecho por ApexVilla" decoding="async" fetchpriority="high">
           </div>
-          <figcaption>Diseño exclusivo, adaptado al celular y listo para WhatsApp.</figcaption>
+          <figcaption id="hero-site-cap">Sitio real: <strong>Mitsujas Guayana</strong> · Puerto Ordaz</figcaption>
+          <div class="visual-dots" id="hero-site-dots" role="tablist" aria-label="Sitios de clientes"></div>
         </figure>
       </div>
     </section>

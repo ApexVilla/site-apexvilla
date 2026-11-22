@@ -7,6 +7,94 @@
  * Enquanto algum dos dois for o placeholder, o gtag.js não é carregado e o clique
  * no WhatsApp só abre o WhatsApp — sem erro no console.
  */
+/* Carrossel do hero: troca os sites reais o tempo todo (mobile e desktop). */
+(() => {
+  const img = document.getElementById('hero-site-img');
+  const cap = document.getElementById('hero-site-cap');
+  const dots = document.getElementById('hero-site-dots');
+  if (!img || !cap || !dots) return;
+
+  const SITES = [
+    ['mitsujas', 'Mitsujas Guayana', 'Puerto Ordaz'],
+    ['despacho', 'Despacho de Abogados AP', 'Abogacía'],
+    ['wladimir', 'Wladimir Cova 360', 'Suministro industrial'],
+    ['futuristas', 'Futuristas de la Radio', 'Academia de locución'],
+    ['drasory', 'Dra. Sory', 'Pediatría y lactancia'],
+    ['servidmed', 'Servid Med ELAM', 'Planes odontológicos'],
+    ['beritolam', 'Berit Olam', 'Vestidos de novia'],
+    ['elsangela', 'Elsângela Melo', 'Biomedicina estética'],
+    ['fenix', 'Fênix Funerária', 'Planes funerarios'],
+    ['carlyle', 'Renato Carlyle', 'Mentoría ejecutiva'],
+    ['sfera', 'SFERA', 'Integración e IA'],
+    ['infinity', 'Infinity.ai', 'Automatización B2B'],
+  ];
+
+  let i = 0;
+  let timer = 0;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const srcOf = (slug) => '/img/sitio-web/' + slug + '-640x480.webp';
+
+  function paint(index, animate) {
+    const [slug, name, place] = SITES[index];
+    const nextSrc = srcOf(slug);
+    const apply = () => {
+      img.src = nextSrc;
+      img.alt = 'Sitio web de ' + name + ', hecho por ApexVilla';
+      cap.innerHTML = 'Sitio real: <strong>' + name + '</strong> · ' + place;
+      [...dots.children].forEach((b, n) => b.setAttribute('aria-current', n === index ? 'true' : 'false'));
+      img.classList.remove('is-out');
+      cap.classList.remove('is-out');
+    };
+    if (!animate) {
+      apply();
+      return;
+    }
+    img.classList.add('is-out');
+    cap.classList.add('is-out');
+    window.setTimeout(apply, 280);
+  }
+
+  function preload(index) {
+    const a = new Image();
+    a.src = srcOf(SITES[index][0]);
+  }
+
+  SITES.forEach((_, n) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Ver ' + SITES[n][1]);
+    b.addEventListener('click', () => {
+      i = n;
+      paint(i, true);
+      preload((i + 1) % SITES.length);
+      arm();
+    });
+    dots.appendChild(b);
+  });
+
+  function step() {
+    i = (i + 1) % SITES.length;
+    paint(i, true);
+    preload((i + 1) % SITES.length);
+  }
+
+  function arm() {
+    if (reduce) return;
+    window.clearInterval(timer);
+    timer = window.setInterval(step, 3200);
+  }
+
+  paint(0, false);
+  preload(1);
+  arm();
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') window.clearInterval(timer);
+    else arm();
+  });
+})();
+
 /* Partículas douradas do hero — a mesma ideia da home, só dentro desta seção.
    Não depende do Google Ads: roda mesmo com o ID ainda em placeholder. */
 (() => {
