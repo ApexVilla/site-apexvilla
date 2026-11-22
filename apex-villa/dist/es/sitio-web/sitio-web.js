@@ -32,7 +32,7 @@
   }
 
   function onWaActivate(e) {
-    const a = e.target instanceof Element && e.target.closest('a[href^="https://wa.me/"]');
+    const a = e.target instanceof Element && e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
     if (!a) return;
 
     const url = a.href;
