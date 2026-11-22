@@ -7,12 +7,16 @@
  * Enquanto algum dos dois for o placeholder, o gtag.js não é carregado e o clique
  * no WhatsApp só abre o WhatsApp — sem erro no console.
  */
-/* Carrossel do hero: troca os sites reais o tempo todo (mobile e desktop). */
+/* Carrossel do hero: todos os sites reais, em loop, com crossfade. */
 (() => {
-  const img = document.getElementById('hero-site-img');
+  const stack = document.getElementById('hero-site-stack');
   const cap = document.getElementById('hero-site-cap');
   const dots = document.getElementById('hero-site-dots');
-  if (!img || !cap || !dots) return;
+  const bar = document.getElementById('hero-site-bar');
+  if (!stack || !cap || !dots) return;
+
+  const layers = [...stack.querySelectorAll('img')];
+  if (layers.length < 2) return;
 
   const SITES = [
     ['mitsujas', 'Mitsujas Guayana', 'Puerto Ordaz'],
@@ -29,69 +33,128 @@
     ['infinity', 'Infinity.ai', 'Automatización B2B'],
   ];
 
-  let i = 0;
-  let timer = 0;
+  const HOLD = 2800;
+  const FADE = 900;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i = 0;
+  let front = 0;
+  let timer = 0;
+  let busy = false;
 
   const srcOf = (slug) => '/img/sitio-web/' + slug + '-640x480.webp';
 
-  function paint(index, animate) {
-    const [slug, name, place] = SITES[index];
+  function caption(index) {
+    const [, name, place] = SITES[index];
+    return 'Sitio real: <strong>' + name + '</strong> · ' + place;
+  }
+
+  function setDots(index) {
+    [...dots.children].forEach((b, n) => {
+      b.setAttribute('aria-current', n === index ? 'true' : 'false');
+    });
+  }
+
+  function restartBar() {
+    if (!bar || reduce) return;
+    bar.classList.remove('is-run');
+    void bar.offsetWidth;
+    bar.classList.add('is-run');
+  }
+
+  function load(img, src) {
+    return new Promise((resolve) => {
+      if (img.getAttribute('src') === src && img.complete) {
+        resolve();
+        return;
+      }
+      const done = () => {
+        img.onload = null;
+        img.onerror = null;
+        resolve();
+      };
+      img.onload = done;
+      img.onerror = done;
+      img.src = src;
+      if (img.complete) done();
+    });
+  }
+
+  async function show(index, animate) {
+    const [slug, name] = SITES[index];
     const nextSrc = srcOf(slug);
-    const apply = () => {
-      img.src = nextSrc;
-      img.alt = 'Sitio web de ' + name + ', hecho por ApexVilla';
-      cap.innerHTML = 'Sitio real: <strong>' + name + '</strong> · ' + place;
-      [...dots.children].forEach((b, n) => b.setAttribute('aria-current', n === index ? 'true' : 'false'));
-      img.classList.remove('is-out');
+    const incoming = layers[1 - front];
+    const outgoing = layers[front];
+
+    busy = true;
+    await load(incoming, nextSrc);
+    incoming.alt = 'Sitio web de ' + name + ', hecho por ApexVilla';
+
+    if (!animate || reduce) {
+      incoming.classList.add('is-on');
+      incoming.classList.remove('is-off');
+      outgoing.classList.add('is-off');
+      outgoing.classList.remove('is-on');
+      front = 1 - front;
       cap.classList.remove('is-out');
-    };
-    if (!animate) {
-      apply();
+      cap.innerHTML = caption(index);
+      setDots(index);
+      restartBar();
+      busy = false;
       return;
     }
-    img.classList.add('is-out');
+
     cap.classList.add('is-out');
-    window.setTimeout(apply, 280);
-  }
+    incoming.classList.add('is-on');
+    incoming.classList.remove('is-off');
+    outgoing.classList.remove('is-on');
+    outgoing.classList.add('is-off');
+    front = 1 - front;
 
-  function preload(index) {
-    const a = new Image();
-    a.src = srcOf(SITES[index][0]);
+    window.setTimeout(() => {
+      cap.innerHTML = caption(index);
+      cap.classList.remove('is-out');
+      setDots(index);
+      restartBar();
+      busy = false;
+    }, Math.min(420, FADE));
   }
-
-  SITES.forEach((_, n) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('aria-label', 'Ver ' + SITES[n][1]);
-    b.addEventListener('click', () => {
-      i = n;
-      paint(i, true);
-      preload((i + 1) % SITES.length);
-      arm();
-    });
-    dots.appendChild(b);
-  });
 
   function step() {
+    if (busy) return;
     i = (i + 1) % SITES.length;
-    paint(i, true);
-    preload((i + 1) % SITES.length);
+    show(i, true);
   }
 
   function arm() {
-    if (reduce) return;
     window.clearInterval(timer);
-    timer = window.setInterval(step, 3200);
+    if (reduce) return;
+    timer = window.setInterval(step, HOLD);
   }
 
-  paint(0, false);
-  preload(1);
-  arm();
+  SITES.forEach((site, n) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Ver ' + site[1]);
+    b.addEventListener('click', () => {
+      if (busy || n === i) return;
+      i = n;
+      show(i, true);
+      arm();
+    });
+    dots.appendChild(b);
+    const warm = new Image();
+    warm.src = srcOf(site[0]);
+  });
+
+  show(0, false).then(arm);
 
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') window.clearInterval(timer);
-    else arm();
+    if (document.visibilityState === 'hidden') {
+      window.clearInterval(timer);
+      return;
+    }
+    restartBar();
+    arm();
   });
 })();
 
