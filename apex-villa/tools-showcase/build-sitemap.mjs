@@ -21,6 +21,8 @@ const PAGES = [
   ['es/sistemas-a-medida/index.html',        '/es/sistemas-a-medida/',       'monthly', '0.8'],
   ['links/index.html',                       '/links/',                      'monthly', '0.8', ['/links-og.jpg', 'ApexVilla — Links Oficiais']],
   ['es/links/index.html',                    '/es/links/',                   'monthly', '0.8', ['/links-og.jpg', 'ApexVilla — Enlaces Oficiales']],
+  ['es/sitio-web/index.html',                '/es/sitio-web/',               'weekly',  '0.8'],
+  ['es/privacidad/index.html',               '/es/privacidad/',              'yearly',  '0.3'],
 ];
 
 const today = process.argv[2] || '2026-08-03';

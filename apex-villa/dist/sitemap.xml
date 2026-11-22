@@ -130,4 +130,16 @@
       <image:title>ApexVilla — Enlaces Oficiales</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://apexvilla.com.br/es/sitio-web/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://apexvilla.com.br/es/privacidad/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

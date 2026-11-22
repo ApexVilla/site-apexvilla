@@ -220,3 +220,16 @@ Six generated service pages (3 pt + 3 es), one per keyword cluster, because anch
 - `build-landings.mjs` reuses the critical CSS, fonts and CSS bundle by regex-matching `dist/index.html`. **If `dist/index.html`'s head changes shape, those `grab()` calls throw** — deliberately, so the landings can't silently render unstyled. Fix the pattern rather than deleting the guard.
 - Landings intentionally don't load GSAP or the Spline scene — they're entry points and must open fast. They ship a ~10-line inline script for the mobile menu only.
 - Adding a landing page: add it to `PAGES` + `PAIRS`, add both URLs to `dist/sitemap.xml`, and link it from the footer in `UI`.
+
+### Landing `/es/sitio-web/` — Google Ads Venezuela (22/11/2026)
+
+Página escrita à mão, isolada, só em espanhol. Não entra no `build-static` e não tem par em pt-BR. Campanha Black Friday, US$ 113, um único destino: WhatsApp.
+
+| Arquivo | Papel |
+|---|---|
+| `dist/es/sitio-web/index.html` | a landing (CSS inline, fontes de `/fonts/`, sem menu) |
+| `dist/es/sitio-web/sitio-web.js` | partículas do hero + `GOOGLE_ADS_ID` / `GOOGLE_ADS_CONVERSION` |
+| `dist/es/privacidad/index.html` | política linkada no rodapé |
+| `dist/img/sitio-web/*.webp` | recortes de sites reais de clientes |
+
+Trocar o ID do Google Ads é editar as duas constantes no topo do `sitio-web.js` e salvar. Enquanto forem `AW-XXXXXXXXXX`, o gtag.js não carrega. O nginx serve `/es/sitio-web/` com `no-cache` e com uma CSP própria (`location ^~` em `deploy/nginx/default.conf`) que libera os hosts do Google **só nesta página**. Não há script inline aqui, então não há hash de CSP para manter.
