@@ -1,37 +1,59 @@
 /* Landing /es/sitio-web/ — Google Ads Venezuela (Black Friday US$ 113).
  *
- * Tags: Google Tag Manager GTM-MPS3TVJ6.
- * Conversão de WhatsApp: no GTM, trigger de evento personalizado "whatsapp_click".
+ * GTM-MPS3TVJ6 + gtag AW-18589124461 estão no <head>.
+ * Conversão no clique de WhatsApp: AW-18589124461/ehtECPbVi70dEO2O_p9F
  */
 
-/* Google Tag Manager — tags de Ads/conversão ficam no container.
-   Sem <script> inline: não exige hash novo na CSP desta página. */
-const GTM_ID = 'GTM-MPS3TVJ6';
-
 (() => {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-  function gtag() { window.dataLayer.push(arguments); }
-  window.gtag = window.gtag || gtag;
-  gtag('js', new Date());
+  const SEND_TO = 'AW-18589124461/ehtECPbVi70dEO2O_p9F';
 
-  const s = document.createElement('script');
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(GTM_ID);
-  document.head.appendChild(s);
-
-  const pushWa = (e) => {
-    const a = e.target instanceof Element && e.target.closest('a[href^="https://wa.me/"]');
-    if (!a) return;
+  function fireConversion(callback) {
+    window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'whatsapp_click',
       event_category: 'contact',
       event_label: 'sitio-web',
-      whatsapp_url: a.href,
     });
-  };
-  document.addEventListener('click', pushWa);
-  document.addEventListener('auxclick', (e) => { if (e.button === 1) pushWa(e); });
+
+    let called = false;
+    const done = () => {
+      if (called) return;
+      called = true;
+      if (typeof callback === 'function') callback();
+    };
+
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', { send_to: SEND_TO, event_callback: done });
+      // Se o gtag não responder (bloqueador etc.), não prende o visitante.
+      setTimeout(done, 2000);
+      return;
+    }
+    done();
+  }
+
+  function onWaActivate(e) {
+    const a = e.target instanceof Element && e.target.closest('a[href^="https://wa.me/"]');
+    if (!a) return;
+
+    const url = a.href;
+    const newTab =
+      a.target === '_blank' ||
+      e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ||
+      e.button === 1;
+
+    // Nova aba / botão do meio: dispara e deixa o navegador abrir o WhatsApp.
+    if (newTab) {
+      fireConversion();
+      return;
+    }
+
+    // Mesma aba: só redireciona depois do event_callback (ou timeout).
+    e.preventDefault();
+    fireConversion(() => { window.location.href = url; });
+  }
+
+  document.addEventListener('click', onWaActivate);
+  document.addEventListener('auxclick', (e) => { if (e.button === 1) onWaActivate(e); });
 })();
 
 /* Carrossel do hero: todos os sites reais, em loop, com crossfade. */

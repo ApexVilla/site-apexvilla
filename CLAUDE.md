@@ -228,8 +228,8 @@ Página escrita à mão, isolada, só em espanhol. Não entra no `build-static` 
 | Arquivo | Papel |
 |---|---|
 | `dist/es/sitio-web/index.html` | a landing (CSS inline, fontes de `/fonts/`, sem menu) |
-| `dist/es/sitio-web/sitio-web.js` | partículas do hero + GTM `GTM-MPS3TVJ6` + evento `whatsapp_click` |
+| `dist/es/sitio-web/sitio-web.js` | partículas do hero + conversão Ads no clique de WhatsApp |
 | `dist/es/privacidad/index.html` | política linkada no rodapé |
 | `dist/img/sitio-web/*.webp` | recortes de sites reais de clientes |
 
-O GTM é `GTM-MPS3TVJ6` (constante `GTM_ID` em `sitio-web.js`). Conversão de WhatsApp: no GTM, trigger de evento personalizado `whatsapp_click`. O nginx serve `/es/sitio-web/` com `no-cache` e CSP própria (`location ^~` em `deploy/nginx/default.conf`) liberando os hosts do Google **só nesta página**. Sem script inline — sem hash de CSP para manter.
+No `<head>`: GTM `GTM-MPS3TVJ6` + gtag `AW-18589124461`. Conversão no clique de WhatsApp: `AW-18589124461/ehtECPbVi70dEO2O_p9F` (com `event_callback` se abrir na mesma aba). O nginx serve `/es/sitio-web/` com `no-cache` e CSP própria (`location ^~`); se mudar um script inline do head, atualize os sha256 nesse bloco.
