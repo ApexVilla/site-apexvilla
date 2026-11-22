@@ -1,12 +1,39 @@
-/* Landing /es/sitio-web/ — Google Ads (Venezuela, Black Friday US$ 113).
+/* Landing /es/sitio-web/ — Google Ads Venezuela (Black Friday US$ 113).
  *
- * Troque os dois valores abaixo pelos do Google Ads e salve: o nginx serve este
- * arquivo com "no-cache", então vale na próxima visita (sem renomear, sem build).
- *   GOOGLE_ADS_ID          → Google Ads › Ferramentas › Conversões › Configuração da tag: "AW-123456789"
- *   GOOGLE_ADS_CONVERSION  → o "send_to" da ação de conversão:                         "AW-123456789/AbCdEfGh"
- * Enquanto algum dos dois for o placeholder, o gtag.js não é carregado e o clique
- * no WhatsApp só abre o WhatsApp — sem erro no console.
+ * Tags: Google Tag Manager GTM-MPS3TVJ6.
+ * Conversão de WhatsApp: no GTM, trigger de evento personalizado "whatsapp_click".
  */
+
+/* Google Tag Manager — tags de Ads/conversão ficam no container.
+   Sem <script> inline: não exige hash novo na CSP desta página. */
+const GTM_ID = 'GTM-MPS3TVJ6';
+
+(() => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = window.gtag || gtag;
+  gtag('js', new Date());
+
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(GTM_ID);
+  document.head.appendChild(s);
+
+  const pushWa = (e) => {
+    const a = e.target instanceof Element && e.target.closest('a[href^="https://wa.me/"]');
+    if (!a) return;
+    window.dataLayer.push({
+      event: 'whatsapp_click',
+      event_category: 'contact',
+      event_label: 'sitio-web',
+      whatsapp_url: a.href,
+    });
+  };
+  document.addEventListener('click', pushWa);
+  document.addEventListener('auxclick', (e) => { if (e.button === 1) pushWa(e); });
+})();
+
 /* Carrossel do hero: todos os sites reais, em loop, com crossfade. */
 (() => {
   const stack = document.getElementById('hero-site-stack');
@@ -242,42 +269,4 @@
     running = visible;
   });
   frame();
-})();
-
-const GOOGLE_ADS_ID = 'AW-XXXXXXXXXX';
-const GOOGLE_ADS_CONVERSION = 'AW-XXXXXXXXXX/YYYYYYYY';
-
-(() => {
-  const idOk = /^AW-\d+$/.test(GOOGLE_ADS_ID);
-  const conversionOk = idOk && /^AW-\d+\/[\w-]+$/.test(GOOGLE_ADS_CONVERSION);
-  if (!idOk) return;
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { window.dataLayer.push(arguments); }
-  window.gtag = window.gtag || gtag;
-  gtag('js', new Date());
-  gtag('config', GOOGLE_ADS_ID);
-
-  // O gtag.js entra depois do load e com o navegador ocioso: não disputa a
-  // renderização da página. Cliques feitos antes disso ficam na fila do
-  // dataLayer e são enviados quando ele carregar (o WhatsApp abre em outra aba,
-  // então esta página continua aberta).
-  const load = () => {
-    const s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GOOGLE_ADS_ID);
-    document.head.appendChild(s);
-  };
-  const idle = () => ('requestIdleCallback' in window ? requestIdleCallback(load, { timeout: 2000 }) : setTimeout(load, 200));
-  if (document.readyState === 'complete') idle();
-  else addEventListener('load', idle, { once: true });
-
-  if (!conversionOk) return;
-  const onClick = (e) => {
-    const a = e.target instanceof Element && e.target.closest('a[href^="https://wa.me/"]');
-    if (a) gtag('event', 'conversion', { send_to: GOOGLE_ADS_CONVERSION });
-  };
-  document.addEventListener('click', onClick);
-  // Clique com o botão do meio (abrir em nova aba) também é contato.
-  document.addEventListener('auxclick', (e) => { if (e.button === 1) onClick(e); });
 })();
